@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		 Scanner sc=new Scanner(System.in);
+		 int n=sc.nextInt();
+		 int []arr=new int[n];
+		 for(int i=0;i<n;i++)
+		 {
+		     arr[i]=sc.nextInt();
+		 }
+		 int t=sc.nextInt();
+	     System.out.println(lsearch(arr,t,1,4));	 
+	}
+	public static int lsearch(int []arr,int t,int st,int en)
+	{
+	    if(arr.length==0)
+	    {
+	        return -1;
+	    }
+	    for(int i=st;i<en;i++)
+	    {
+	        int e=arr[i];
+	        if(e==t)
+	        {
+	            System.out.println("Index Value :");
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+}
