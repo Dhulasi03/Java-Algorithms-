@@ -1,1 +1,1 @@
-# Java-Algorithms-by Kunal Lushwaha
+# Java-Algorithms-by Kunal Kushwaha
