@@ -1,0 +1,92 @@
+import java.util.*;
+class Solution {
+     public static void main(String []args)
+    {
+        Scanner sc=new Scanner (System.in);
+        int []arr={2,2,2,9,2};
+        int t=9;
+        System.out.print(search(arr,t));
+        
+    }
+    public static  int search(int[] arr, int t)
+    {
+        int p = findwithdupli(arr);
+        
+        if (p == -1) { // If no pivot, do a normal binary search
+            return bin(arr, t, 0, arr.length - 1);
+        }
+        
+        if (arr[p] == t) { 
+            return p;
+        }
+        
+        if (t >= arr[0]) { 
+            return bin(arr, t, 0, p - 1);
+        }
+        
+        return bin(arr, t, p + 1, arr.length - 1);
+    }
+    
+    static int bin(int[] arr, int t, int s, int e) {
+        while (s <= e) { // Proper binary search loop
+            int mid = s + (e - s) / 2;
+            if (arr[mid] == t) {
+                return mid;
+            } else if (t < arr[mid]) {
+                e = mid - 1;
+            } else {
+                s = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    static int findwithdupli(int[] arr) {
+        int s = 0, e = arr.length - 1;
+        
+        if (arr[s] <= arr[e]) { // If array is not rotated, return 0
+            return -1;
+        }
+        
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+            
+            if (mid < e && arr[mid] > arr[mid + 1]) {
+                return mid;
+            }
+            if (mid > s && arr[mid] < arr[mid - 1]) {
+                return mid - 1;
+            }
+
+
+
+
+            //this is the only change in duplicate add conditions for ignoring duplicate values;
+
+            if(arr[mid]==arr[s]&&arr[mid]==arr[e])
+            {
+                if(arr[s]>arr[s+1])
+                {
+                    return s;
+                    
+                }
+                 s++;
+                if(arr[e]<arr[e-1])
+                {
+                    return e-1;
+                    
+                }
+                 e--;
+                
+            }
+            else if(arr[s]<arr[mid]||arr[s]==arr[mid]&&arr[mid]>arr[e])
+            {
+                s=mid+1;
+            }
+            else{
+                e=mid-1;
+            }
+        }
+        return -1;
+    }
+}
